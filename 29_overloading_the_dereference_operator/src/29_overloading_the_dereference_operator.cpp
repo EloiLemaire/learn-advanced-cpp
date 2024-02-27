@@ -16,7 +16,11 @@ int main() {
 	Complex c1(1, 2);
 	cout << c1 << endl;
 	cout << *c1 << endl;
-
+	try {
+	cout << c1[1] << endl;
+	} catch(string &e){
+		cout << e << endl;
+	}
 
 	return 0;
 }

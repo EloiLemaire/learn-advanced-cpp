@@ -48,5 +48,18 @@ bool Complex::operator!=(const Complex &other) const{
 Complex Complex::operator*() const{
 	return Complex(real, -imaginary);
 }
+
+double Complex::operator[](const int index) const{
+	if (index == 0){
+		return real;
+	}
+	if (index == 1){
+		return imaginary;
+	}
+	else{
+		throw string("Index not allowed.");
+	}
+}
+
 }
 /* namespace ele */
