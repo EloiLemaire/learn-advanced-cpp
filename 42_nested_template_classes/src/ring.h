@@ -7,7 +7,6 @@
 
 #ifndef RING_H_
 #define RING_H_
-#include <vector>
 #include <iostream>
 using namespace std;
 
@@ -16,36 +15,39 @@ namespace ele {
 template<typename T>
 class ring {
 private:
-	vector<T> data;
-	int length;
-	int next_idx = 0;
+	int m_pos = 0;
+	int m_size;
+	T* m_values;
 
 public:
 	class iterator;
-	ring(int size){
-		this->length = size;
-		this->data = vector<T>(length, T());
+	ring(int size): m_pos(0), m_size(size), m_values(NULL){ // m_values(NULL or 0) to prevent from any compiler warning
+		m_values = new T[size];
+	}
+
+	~ring(){
+		delete [] m_values; // Don't forget the [] to delete the whole array.
 	}
 
 	void add(T value){
-		data[next_idx] = value;
-		next_idx = (next_idx + 1) % length;
+		m_values[m_pos++] = value;
+		m_pos %= m_size;
 	}
 
-	auto get(int idx) -> T{
-		if (idx < 0 || idx >= length){
+	T &get(int idx){
+		if (idx < 0 || idx >= m_size){
 			throw "Index is out of range";
 		}
-		else return data[idx];
+		else return m_values[idx];
 	}
 
 	int size(){
-		return length;
+		return m_size;
 	}
 
 	void print(){
-		for (auto d: data){
-			cout << d << endl;
+		for (int i = 0; i < m_size; i++){
+			cout << m_values[i] << endl;
 		}
 	}
 };

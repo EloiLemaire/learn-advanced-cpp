@@ -19,6 +19,7 @@ int main() {
 	test_ring.add("2");
 	test_ring.add("3");
 	test_ring.add("4");
+	test_ring.add("5");
 
 	for (int i = 0; i < test_ring.size(); i++) {
 		cout << test_ring.get(i) << endl;
