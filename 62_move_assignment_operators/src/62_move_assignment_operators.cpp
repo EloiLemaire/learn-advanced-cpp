@@ -93,7 +93,7 @@ int main() {
 	test3 = test1; // "Assignment constructor called"
 	cout << test3 << endl;
 
-	Test test4 = getTest(); // Don't know why but move constructor not called apparently.
+	Test test4(static_cast<Test &&>(test1)); // "Move constructor called"
 	cout << test4 << endl;
 
 	return 0;
