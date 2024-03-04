@@ -1,12 +1,11 @@
 //============================================================================
-// Name        : 61_move_constructor.cpp
+// Name        : 62_move_assignment_operators.cpp
 // Author      : Eloi Lemaire
 // Version     :
 // Copyright   : Your copyright notice
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 
-// Move constructor steals resources from an object without creating new memory but simply reallocating.
 
 #include <iostream>
 using namespace std;
@@ -42,10 +41,21 @@ public:
 		other._pBuffer = nullptr;
 	}
 
-	Test operator=(const Test &other) {
+
+	Test &operator=(const Test &other) {
 		cout << "Assignment constructor called" << endl;
 		_pBuffer = new int[SIZE] { 0 };
 		memcpy(_pBuffer, other._pBuffer, SIZE * sizeof(int));
+		return *this;
+	}
+
+	Test &operator=(Test &&other){ // Move assignment operator (take a Test &&other = RValue reference) as arg.
+		// 1. Delete receiving resources, 2. Assign resources, 3. Delete giving resources. 4. Return *this
+		cout << "Move assignment called." << endl;
+
+		delete [] _pBuffer;
+		_pBuffer = other._pBuffer;
+		other._pBuffer = nullptr;
 		return *this;
 	}
 
@@ -65,6 +75,10 @@ std::ostream& operator<<(std::ostream &out, const Test &test) {
 	return out;
 }
 
+Test getTest(){
+	return Test();
+}
+
 int main() {
 	Test test; // "No parameter constructor called"
 	cout << test << endl;
@@ -79,6 +93,8 @@ int main() {
 	test3 = test1; // "Assignment constructor called"
 	cout << test3 << endl;
 
+	Test test4 = getTest(); // Don't know why but move constructor not called apparently.
+	cout << test4 << endl;
 
 	return 0;
 }
