@@ -9,9 +9,12 @@
 #include <iostream>
 #include "Bitmap.h"
 using namespace std;
+using namespace ele;
 
 
 int main() {
-	cout << "Hello world!" << endl; // prints Hello world!
+	Bitmap bitmap(800, 600);
+	bitmap.write("test.bmp");
+	cout << "Program finished!" << endl; // prints Hello world!
 	return 0;
 }
