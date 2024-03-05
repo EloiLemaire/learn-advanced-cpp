@@ -9,7 +9,7 @@
 
 namespace ele {
 
-Bitmap::Bitmap(int witdh, int height): m_width(witdh), m_height(height) {
+Bitmap::Bitmap(int witdh, int height): m_width(witdh), m_height(height), m_pPixels(new uint8_t[witdh * height * 3]) {
 	// TODO Auto-generated constructor stub
 
 }
