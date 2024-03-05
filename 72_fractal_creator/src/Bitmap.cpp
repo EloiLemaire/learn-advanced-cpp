@@ -55,6 +55,11 @@ bool Bitmap::write(string filename) {
 }
 
 void Bitmap::setPixel(int x, int y, uint8_t red, uint8_t green, uint8_t blue) {
+	if (x > 0 && x < m_width && y > 0 && y < m_height) {
+		m_pPixels[3 * x + 3 * y * m_width] = blue;
+		m_pPixels[3 * x + 3 * y * m_width + 1] = green;
+		m_pPixels[3 * x + 3 * y * m_width + 2] = red;
+	}
 
 }
 
