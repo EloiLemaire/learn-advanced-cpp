@@ -6,6 +6,9 @@
  */
 
 #include "Bitmap.h"
+#include "BitmapFileHeader.h"
+#include "BitmapInfoHeader.h"
+#include <fstream>
 
 namespace ele {
 
@@ -20,7 +23,14 @@ void Bitmap::setPixel(int x, int y, uint8_t red, uint8_t green, uint8_t blue){
 
 
 bool Bitmap::write(string filename){
-	return false;
+	BitmapFileHeader fileHeader;
+	BitmapInfoHeader infoHeader;
+
+	fileHeader.fileSize = sizeof(BitmapFileHeader) + sizeof(BitmapInfoHeader) + m_width * m_height * 3;
+	fileHeader.dataOffset = sizeof(BitmapFileHeader) + sizeof(BitmapInfoHeader);
+
+	infoHeader.width = m_width;
+	infoHeader.height = m_height;
 }
 
 
