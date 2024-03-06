@@ -23,12 +23,13 @@ int main() {
 
 	for (int y = 0; y < HEIGHT; y++) {
 		for (int x = 0; x < WIDTH; x++) {
-			double xFractal = (2.0 * x) / (1.0 * (WIDTH - 1)) - 1;
-			double yFractal = (2.0 * y) / (1.0 * (HEIGHT - 1)) - 1;
+			double xFractal = (x - WIDTH/2.0 - 200) * 2.0 / WIDTH;
+			double yFractal = (y - HEIGHT/2.0) * 2.0 / HEIGHT;
 			int iterations = Mandelbrot::getIterations(xFractal, yFractal);
-			uint8_t red = (uint8_t) (255 * (double) iterations
+			uint8_t color = (uint8_t) (256 * (double) iterations
 					/ Mandelbrot::MAX_ITERATIONS);
-			bitmap.setPixel(x, y, red, red, red);
+			color = color * color * color;
+			bitmap.setPixel(x, y, 0, color, 0);
 		}
 
 	}
