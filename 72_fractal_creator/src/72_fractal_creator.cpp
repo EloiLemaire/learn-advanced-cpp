@@ -41,9 +41,13 @@ int main() {
 
 	bitmap.write("test.bmp");
 
+	int sum{0};
 	for (int i = 0; i < Mandelbrot::MAX_ITERATIONS + 1; i ++){
 		cout << histogram[i] << endl;
+		sum += histogram[i];
 	}
+
+	cout << "Sum: " << sum << endl;
 
 	cout << "Program finished!" << endl; // prints Hello world!
 	return 0;
